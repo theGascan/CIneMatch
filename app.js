@@ -1003,17 +1003,8 @@
           </a>
         </div>
 
-        <!-- Card Footer: Separate "Want to watch" Button + Reaction Buttons + Secondary Actions -->
+        <!-- Card Footer: Reaction Buttons + Separate "Want to watch" Button + Secondary Actions -->
         <div class="rec-card-footer">
-          <!-- Separate Standalone "Want to watch" Button -->
-          <div class="want-to-watch-wrap">
-            <button class="btn-want-to-watch ${hasHyped ? 'active' : ''}" data-rec-id="${item.id}" data-reaction="hyped" title="Mark as Want to watch!">
-              <span class="rxn-icon">👀</span>
-              <span class="want-to-watch-label">Want to watch</span>
-              <span class="rxn-count">(${hypedList.length})</span>
-            </button>
-          </div>
-
           <!-- Reaction Buttons Deck -->
           <div class="reaction-buttons-deck">
             <!-- Button: "I beg you to watch this" -->
@@ -1045,6 +1036,15 @@
               <span class="rxn-icon">🤮</span>
               <span>Hate it</span>
               <span class="rxn-count">(${hatedList.length})</span>
+            </button>
+          </div>
+
+          <!-- Separate Standalone "Want to watch" Button (below the emojis) -->
+          <div class="want-to-watch-wrap">
+            <button class="btn-want-to-watch ${hasHyped ? 'active' : ''}" data-rec-id="${item.id}" data-reaction="hyped" title="Mark as Want to watch!">
+              <span class="rxn-icon">👀</span>
+              <span class="want-to-watch-label">Want to watch</span>
+              <span class="rxn-count">(${hypedList.length})</span>
             </button>
           </div>
 

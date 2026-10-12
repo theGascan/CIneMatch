@@ -949,8 +949,8 @@ button:disabled,
     "poster   note"
     "poster   cta"
     "poster   actions"
-    "want     want"
     "rx       rx"
+    "want     want"
     "voters   voters"
     "comments comments";
   column-gap: 20px;
@@ -1184,12 +1184,10 @@ button:disabled,
   height: 14px;
 }
 
-/* Separate standalone "Want to watch" button */
+/* Separate standalone "Want to watch" button (positioned below the emojis) */
 .want-to-watch-wrap {
   grid-area: want;
-  margin-top: 18px;
-  padding-top: 16px;
-  border-top: 1px solid var(--border);
+  margin-top: 6px;
   display: flex;
 }
 
@@ -1267,7 +1265,9 @@ button:disabled,
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 6px;
-  margin-top: 8px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
 }
 
 .btn-reaction {
@@ -2460,8 +2460,8 @@ button:disabled,
       "note     note"
       "cta      cta"
       "actions  actions"
-      "want     want"
       "rx       rx"
+      "want     want"
       "voters   voters"
       "comments comments";
     column-gap: 14px;
@@ -2494,19 +2494,19 @@ button:disabled,
     display: none;
   }
 
-  .want-to-watch-wrap {
-    margin-top: 14px;
+  .reaction-buttons-deck {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-top: 16px;
     padding-top: 14px;
+  }
+
+  .want-to-watch-wrap {
+    margin-top: 6px;
   }
 
   .btn-want-to-watch {
     height: 40px;
-  }
-
-  .reaction-buttons-deck {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    margin-top: 6px;
   }
 
   .btn-reaction {
