@@ -941,16 +941,17 @@ button:disabled,
 .friend-rec-card {
   display: grid;
   grid-template-columns: 132px minmax(0, 1fr);
-  grid-template-rows: auto auto auto auto auto minmax(0, 1fr) auto auto auto;
+  grid-template-rows: auto auto auto auto auto minmax(0, 1fr) auto auto auto auto;
   grid-template-areas:
-    "header  header"
-    "beg     beg"
-    "poster  details"
-    "poster  note"
-    "poster  cta"
-    "poster  actions"
-    "rx      rx"
-    "voters  voters"
+    "header   header"
+    "beg      beg"
+    "poster   details"
+    "poster   note"
+    "poster   cta"
+    "poster   actions"
+    "want     want"
+    "rx       rx"
+    "voters   voters"
     "comments comments";
   column-gap: 20px;
   padding: 16px 20px 20px;
@@ -1183,15 +1184,90 @@ button:disabled,
   height: 14px;
 }
 
-/* Reactions: shadcn toggle buttons */
+/* Separate standalone "Want to watch" button */
+.want-to-watch-wrap {
+  grid-area: want;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  display: flex;
+}
+
+.btn-want-to-watch {
+  width: 100%;
+  height: 38px;
+  padding: 0 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: var(--radius-md);
+  border: 1px solid color-mix(in srgb, var(--foreground) 15%, var(--border));
+  background: color-mix(in srgb, var(--muted) 70%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--foreground) 7%, transparent),
+    0 1px 2px rgba(0, 0, 0, 0.2);
+  color: var(--foreground);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-want-to-watch:hover {
+  background: var(--muted);
+  border-color: color-mix(in srgb, var(--foreground) 26%, var(--border));
+}
+
+.btn-want-to-watch:active {
+  transform: scale(0.98);
+}
+
+.btn-want-to-watch.active {
+  background: rgba(56, 189, 248, 0.12);
+  border-color: rgba(56, 189, 248, 0.45);
+  color: #38bdf8;
+  box-shadow:
+    inset 0 1px 0 rgba(56, 189, 248, 0.18),
+    0 0 0 1px rgba(56, 189, 248, 0.14);
+}
+
+.btn-want-to-watch.active .rxn-count {
+  color: #38bdf8;
+}
+
+[data-theme="light"] .btn-want-to-watch {
+  border-color: color-mix(in srgb, var(--foreground) 13%, var(--border));
+  background: color-mix(in srgb, var(--muted) 60%, var(--card));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 1px 2px rgba(9, 9, 11, 0.05);
+}
+
+[data-theme="light"] .btn-want-to-watch:hover {
+  background: var(--muted);
+  border-color: color-mix(in srgb, var(--foreground) 24%, var(--border));
+}
+
+[data-theme="light"] .btn-want-to-watch.active {
+  background: #f0f9ff;
+  border-color: #7dd3fc;
+  color: #0369a1;
+  box-shadow: 0 0 0 1px rgba(14, 165, 233, 0.14);
+}
+
+[data-theme="light"] .btn-want-to-watch.active .rxn-count {
+  color: #0369a1;
+}
+
+/* Reactions: shadcn toggle buttons with very subtle highlight */
 .reaction-buttons-deck {
   grid-area: rx;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 6px;
-  margin-top: 20px;
-  padding-top: 16px;
-  border-top: 1px solid var(--border);
+  margin-top: 8px;
 }
 
 .btn-reaction {
@@ -1200,23 +1276,47 @@ button:disabled,
   justify-content: center;
   gap: 6px;
   min-width: 0;
-  height: 34px;
+  height: 36px;
   padding: 0 10px;
   border-radius: var(--radius-md);
-  border: 1px solid var(--border);
-  background: transparent;
+  border: 1px solid color-mix(in srgb, var(--foreground) 12%, var(--border));
+  background: color-mix(in srgb, var(--muted) 55%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--foreground) 6%, transparent),
+    0 1px 2px rgba(0, 0, 0, 0.16);
   color: var(--foreground);
   font-size: 13px;
   white-space: nowrap;
-  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+}
+
+.btn-reaction.btn-beg {
+  grid-column: 1 / -1;
 }
 
 .btn-reaction:hover {
   background: var(--muted);
+  border-color: color-mix(in srgb, var(--foreground) 22%, var(--border));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--foreground) 9%, transparent),
+    0 2px 4px rgba(0, 0, 0, 0.22);
 }
 
 .btn-reaction:active {
   transform: scale(0.97);
+}
+
+[data-theme="light"] .btn-reaction {
+  border-color: color-mix(in srgb, var(--foreground) 10%, var(--border));
+  background: color-mix(in srgb, var(--muted) 50%, var(--card));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 1px 2px rgba(9, 9, 11, 0.04);
+}
+
+[data-theme="light"] .btn-reaction:hover {
+  background: var(--muted);
+  border-color: color-mix(in srgb, var(--foreground) 20%, var(--border));
 }
 
 .rxn-count {
@@ -1226,8 +1326,11 @@ button:disabled,
 }
 
 .btn-reaction.active {
-  background: var(--muted);
-  border-color: var(--ring);
+  background: color-mix(in srgb, var(--foreground) 9%, var(--muted));
+  border-color: color-mix(in srgb, var(--foreground) 34%, var(--ring));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--foreground) 12%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--foreground) 10%, transparent);
 }
 
 .btn-reaction.active .rxn-count {
@@ -1395,15 +1498,12 @@ button:disabled,
 }
 
 /* --------------------------------------------------------------------------
-   Compact list view
+   Compact list view — each movie has a subtle highlight around it
    -------------------------------------------------------------------------- */
 .compact-feed-list {
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  background: var(--card);
-  overflow: hidden;
+  gap: 10px;
 }
 
 .compact-feed-item {
@@ -1412,15 +1512,34 @@ button:disabled,
   justify-content: space-between;
   gap: 16px;
   padding: 14px 16px;
-  transition: background-color 0.15s ease;
-}
-
-.compact-feed-item + .compact-feed-item {
-  border-top: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--card);
+  border: 1px solid color-mix(in srgb, var(--foreground) 15%, var(--border));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--foreground) 7%, transparent),
+    0 2px 6px rgba(0, 0, 0, 0.22);
+  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .compact-feed-item:hover {
-  background: color-mix(in srgb, var(--muted) 50%, transparent);
+  background: color-mix(in srgb, var(--muted) 60%, var(--card));
+  border-color: color-mix(in srgb, var(--foreground) 26%, var(--border));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--foreground) 10%, transparent),
+    0 4px 12px rgba(0, 0, 0, 0.28);
+}
+
+[data-theme="light"] .compact-feed-item {
+  border-color: color-mix(in srgb, var(--foreground) 13%, var(--border));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 1px 4px rgba(9, 9, 11, 0.06);
+}
+
+[data-theme="light"] .compact-feed-item:hover {
+  background: var(--card);
+  border-color: color-mix(in srgb, var(--foreground) 24%, var(--border));
+  box-shadow: 0 4px 12px rgba(9, 9, 11, 0.1);
 }
 
 .compact-info-col {
@@ -2335,14 +2454,15 @@ button:disabled,
     grid-template-columns: 96px minmax(0, 1fr);
     grid-template-rows: none;
     grid-template-areas:
-      "header  header"
-      "beg     beg"
-      "poster  details"
-      "note    note"
-      "cta     cta"
-      "actions actions"
-      "rx      rx"
-      "voters  voters"
+      "header   header"
+      "beg      beg"
+      "poster   details"
+      "note     note"
+      "cta      cta"
+      "actions  actions"
+      "want     want"
+      "rx       rx"
+      "voters   voters"
       "comments comments";
     column-gap: 14px;
     padding: 14px 14px 16px;
@@ -2374,11 +2494,19 @@ button:disabled,
     display: none;
   }
 
+  .want-to-watch-wrap {
+    margin-top: 14px;
+    padding-top: 14px;
+  }
+
+  .btn-want-to-watch {
+    height: 40px;
+  }
+
   .reaction-buttons-deck {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    margin-top: 16px;
-    padding-top: 14px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    margin-top: 6px;
   }
 
   .btn-reaction {

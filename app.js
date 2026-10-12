@@ -862,7 +862,7 @@
           <div class="compact-meta-row">
             <span class="compact-by-prefix">Recommended by</span>
             <span class="compact-recommender-name user-colored-name" style="${userStyle}">${escapeHtml(item.recommendedBy)}${isCurrentUser ? ' (You)' : ''}</span>
-            ${hypedCount > 0 ? `<span class="compact-badge-hyped">🔥 ${hypedCount} hyped</span>` : ''}
+            ${hypedCount > 0 ? `<span class="compact-badge-hyped">👀 ${hypedCount} want to watch</span>` : ''}
             ${lovedCount > 0 ? `<span class="compact-badge-loved">❤️ ${lovedCount} loved</span>` : ''}
             ${hatedCount > 0 ? `<span class="compact-badge-hated">🤮 ${hatedCount} hated</span>` : ''}
             ${commentsCount > 0 ? `<span class="compact-badge-comments">💬 ${commentsCount}</span>` : ''}
@@ -1003,8 +1003,17 @@
           </a>
         </div>
 
-        <!-- Card Footer: Reaction Buttons + Comment & Secondary Actions -->
+        <!-- Card Footer: Separate "Want to watch" Button + Reaction Buttons + Secondary Actions -->
         <div class="rec-card-footer">
+          <!-- Separate Standalone "Want to watch" Button -->
+          <div class="want-to-watch-wrap">
+            <button class="btn-want-to-watch ${hasHyped ? 'active' : ''}" data-rec-id="${item.id}" data-reaction="hyped" title="Mark as Want to watch!">
+              <span class="rxn-icon">👀</span>
+              <span class="want-to-watch-label">Want to watch</span>
+              <span class="rxn-count">(${hypedList.length})</span>
+            </button>
+          </div>
+
           <!-- Reaction Buttons Deck -->
           <div class="reaction-buttons-deck">
             <!-- Button: "I beg you to watch this" -->
@@ -1012,13 +1021,6 @@
               <span class="rxn-icon">🙏</span>
               <span class="rxn-label-beg">I beg you to watch this</span>
               <span class="rxn-count">(${begList.length})</span>
-            </button>
-
-            <!-- Button: "Hyped to watch" -->
-            <button class="btn-reaction btn-hyped ${hasHyped ? 'active hyped' : ''}" data-rec-id="${item.id}" data-reaction="hyped" title="Vote: Hyped to watch!">
-              <span class="rxn-icon">🔥</span>
-              <span>Hyped to watch</span>
-              <span class="rxn-count">(${hypedList.length})</span>
             </button>
 
             <button class="btn-reaction ${hasLoved ? 'active loved' : ''}" data-rec-id="${item.id}" data-reaction="loved" title="Vote: Loved it">
@@ -1082,7 +1084,7 @@
 
           ${hypedList.length > 0 ? `
             <div class="voter-group hyped">
-              <span class="voter-group-label">🔥 Hyped to watch:</span>
+              <span class="voter-group-label">👀 Want to watch:</span>
               <div class="voter-chips-wrap">
                 ${hypedList.map(name => renderVoterChip(name, myNameLower)).join('')}
               </div>
@@ -1207,8 +1209,8 @@
       });
     });
 
-    // Reaction Buttons
-    elements.friendsFeedGrid.querySelectorAll('.btn-reaction').forEach(btn => {
+    // Reaction Buttons & Separate "Want to watch" Button
+    elements.friendsFeedGrid.querySelectorAll('.btn-reaction, .btn-want-to-watch').forEach(btn => {
       btn.addEventListener('click', () => {
         const recId = btn.dataset.recId;
         const rxn = btn.dataset.reaction;
@@ -1493,7 +1495,7 @@
 
   function formatVerdict(v) {
     if (v === 'beg') return '"I beg you to watch this!" 🙏';
-    if (v === 'hyped') return 'Hyped to watch 🔥';
+    if (v === 'hyped') return 'Want to watch 👀';
     if (v === 'loved') return 'Loved it ❤️';
     if (v === 'liked') return 'Liked 👍';
     if (v === 'disliked') return "Didn't like 👎";

@@ -40,8 +40,8 @@ All recommendations, reactions, and comments sync live across users via Netlify 
    - Compact list view features an inline **"Stream NOW!"** button.
    - YouTube trailer modal includes an integrated direct stream button in the footer.
 3. **Sentiment Reactions with Friend Attribution**:
+   - **👀 Want to watch** (Separate standalone watchlist button)
    - **🙏 I beg you to watch this** (High-priority fire banner)
-   - **🔥 Hyped to watch**
    - **❤️ Loved it**
    - **👍 Liked**
    - **👎 Didn't like**
